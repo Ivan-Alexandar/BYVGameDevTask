@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    GameObject player1;
-    [SerializeField]
-    GameObject player2;
+    
+    public GameObject player1;
+    public GameObject player2;
 
 
     public GameObject GunFire;

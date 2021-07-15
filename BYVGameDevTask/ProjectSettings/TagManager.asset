@@ -12,6 +12,7 @@ TagManager:
   - Head
   - Leg
   - bullet
+  - Bomb
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - Gun
   - LRButtons
   - hands
-  - 
+  - Bonuses
   - ground
   - 
   - 
