@@ -70,10 +70,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        if (!GunFire.GetComponent<ParticleSystem>().isPlaying)
-        {
-            
-        }
+
         isGrounded1 = Physics2D.OverlapCircle(playerPos1.position, positionRadius, ground);
         isGrounded2 = Physics2D.OverlapCircle(playerPos2.position, positionRadius, ground);
 
@@ -123,7 +120,7 @@ public class PlayerController : MonoBehaviour
         {
             if (canDoubleJump2)
             {
-                rb1.AddForce(Vector2.up * doubleJumpForce * Time.deltaTime, ForceMode2D.Force);
+                rb2.AddForce(Vector2.up * doubleJumpForce * Time.deltaTime, ForceMode2D.Force);
                 canDoubleJump2 = false;
             }
         }
