@@ -9,12 +9,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject player2;
 
+    public GameObject GunFire;
+    public GameObject GunFireM;
+
+    public GameObject[] hp1;
+    public GameObject[] hp2;
+
     public GameObject body1;
     public GameObject body2;
     public GameObject bullet;
     public GameObject bulletM;
     public Transform gunL;
     public Transform gunR;
+
+
     
     public LayerMask ground;
 
@@ -22,7 +30,6 @@ public class PlayerController : MonoBehaviour
 
     public float jumpForce;
     public float doubleJumpForce;
-    public Vector2 jumpHeight;
     public Transform playerPos1;
     public Transform playerPos2;
 
@@ -62,7 +69,10 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-
+        if (!GunFire.GetComponent<ParticleSystem>().isPlaying)
+        {
+            
+        }
         isGrounded1 = Physics2D.OverlapCircle(playerPos1.position, positionRadius, ground);
         isGrounded2 = Physics2D.OverlapCircle(playerPos2.position, positionRadius, ground);
 
@@ -104,7 +114,7 @@ public class PlayerController : MonoBehaviour
        
         if (isGrounded2)
         {
-            rb2.velocity = new Vector2(rb2.velocity.x, jumpForce);
+            rb2.velocity = new Vector2(rb2.velocity.x, jumpForce*Time.deltaTime);
             animator2.SetBool("CanJump", false);
             animator2.Play("Jump");
         }
@@ -112,16 +122,28 @@ public class PlayerController : MonoBehaviour
         {
             if (canDoubleJump2)
             {
-
+                rb1.AddForce(Vector2.up * doubleJumpForce * Time.deltaTime, ForceMode2D.Force);
                 canDoubleJump2 = false;
             }
         }
     }
     public void ShootL()
     {
-        Instantiate(bullet, gunL.position, Quaternion.identity);
+        Instantiate(GunFire, gunL.position, Quaternion.identity);
+        Instantiate<GameObject>(bullet, gunL.position, Quaternion.identity) ;
+        //bullet.GetComponent<Rigidbody2D>().velocity =   new Vector2(10,0);
+        
+
+
     }
-    
+    public void ShootR()
+    {
+        
+        Instantiate(GunFireM, gunR.position, Quaternion.identity);
+        Instantiate(bulletM, gunR.position, Quaternion.identity);
+    }
+
+
 
 }
 

@@ -6,6 +6,12 @@ TagManager:
   tags:
   - body1
   - ground
+  - body2
+  - Gun
+  - Hands
+  - Head
+  - Leg
+  - bullet
   layers:
   - Default
   - TransparentFX
@@ -15,13 +21,13 @@ TagManager:
   - UI
   - 
   - 
+  - bullet
   - shootButtons
-  - body2
   - body1
   - body2
-  - 
+  - Gun
   - LRButtons
-  - 
+  - hands
   - 
   - ground
   - 
@@ -54,4 +60,10 @@ TagManager:
     locked: 0
   - name: Bullets
     uniqueID: 2860025003
+    locked: 0
+  - name: Gun
+    uniqueID: 531509003
+    locked: 0
+  - name: Particles
+    uniqueID: 4109362353
     locked: 0
