@@ -15,15 +15,15 @@ TagManager:
   - UI
   - 
   - 
+  - shootButtons
+  - body2
   - body1
   - body2
+  - 
   - LRButtons
+  - 
+  - 
   - ground
-  - 
-  - 
-  - 
-  - 
-  - 
   - 
   - 
   - 
@@ -46,12 +46,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: HUD
-    uniqueID: 800638531
-    locked: 0
   - name: Buttons
     uniqueID: 3675789379
     locked: 0
-  - name: 
+  - name: HUD
+    uniqueID: 800638531
+    locked: 0
+  - name: Bullets
     uniqueID: 2860025003
     locked: 0
