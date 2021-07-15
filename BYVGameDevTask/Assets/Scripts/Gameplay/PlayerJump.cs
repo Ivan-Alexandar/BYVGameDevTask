@@ -42,11 +42,13 @@ public class PlayerJump : MonoBehaviour
 
         if (isGrounded1)
         {
+            animator1.SetBool("CanJump", true);
             canDoubleJump1 = true;
 
         }
         if (isGrounded2)
         {
+            animator2.SetBool("CanJump", true);
             canDoubleJump2 = true;
         }
     }
@@ -56,7 +58,7 @@ public class PlayerJump : MonoBehaviour
         if (isGrounded1)
         {
             animator1.enabled = true;
-            animator1.Play("FixedRagdollJump");
+            animator1.Play("Jump");
         }
         else
         {
