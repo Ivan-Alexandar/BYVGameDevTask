@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject player2;
 
+
     public GameObject GunFire;
     public GameObject GunFireM;
 
@@ -129,6 +130,7 @@ public class PlayerController : MonoBehaviour
     }
     public void ShootL()
     {
+        SoundManager.PlaySound("Gunshot");
         Instantiate(GunFire, gunL.position, Quaternion.identity);
         Instantiate<GameObject>(bullet, gunL.position, Quaternion.identity) ;
         //bullet.GetComponent<Rigidbody2D>().velocity =   new Vector2(10,0);
@@ -138,7 +140,7 @@ public class PlayerController : MonoBehaviour
     }
     public void ShootR()
     {
-        
+        SoundManager.PlaySound("Gunshot");
         Instantiate(GunFireM, gunR.position, Quaternion.identity);
         Instantiate(bulletM, gunR.position, Quaternion.identity);
     }
