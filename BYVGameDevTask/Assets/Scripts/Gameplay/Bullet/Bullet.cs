@@ -12,6 +12,11 @@ public class Bullet : MonoBehaviour
     public int fullHPBars = 0;
     public int emptyHPBars = 0;
     HealthBonus healthBonus;
+    public GameObject shield;
+    public GameObject body;
+
+
+    static GameObject shield2;
 
     public GameObject BulletFF;
     public GameObject BBCol;
@@ -107,7 +112,7 @@ public class Bullet : MonoBehaviour
             }
 
         }
-        else if (collision.gameObject.tag == "bullet")
+        else if (collision.gameObject.tag == "bulletM")
         {
             SoundManager.PlaySound("BulletRicochet");
             Instantiate(BBCol, collision.transform.position, Quaternion.identity);
@@ -126,7 +131,7 @@ public class Bullet : MonoBehaviour
         else if (collision.gameObject.tag == "HealthBonus")
         {
             healthBonus = collision.collider.GetComponent<HealthBonus>();
-            Instantiate(BBCol, collision.transform.position, Quaternion.identity);
+
             Instantiate(BulletFF, gameObject.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
             Destroy(gameObject);
 
@@ -156,6 +161,23 @@ public class Bullet : MonoBehaviour
                 collisionCount -= 3;
                 headShotCounter = 0;
             }
+        }
+        if (collision.collider.tag == "ShieldBonus")
+        {
+ 
+            Instantiate(BulletFF, gameObject.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            Destroy(gameObject);
+            body = GameObject.FindGameObjectWithTag("body1");
+            //shield2 = Instantiate(shield, body.GetComponent<Rigidbody2D>().transform.position, Quaternion.identity);
+            shield2 = Instantiate(shield, body.transform.position, Quaternion.identity);
+            shield2.transform.parent = GameObject.FindGameObjectWithTag("player1").transform;
+        }
+        if (collision.collider.tag =="shield")
+        {
+            SoundManager.PlaySound("BulletRicochet");
+            Instantiate(BBCol, gameObject.transform.position, Quaternion.identity);
+            Instantiate(BulletFF, gameObject.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            Destroy(gameObject);
         }
         Destroy(gameObject);
     }

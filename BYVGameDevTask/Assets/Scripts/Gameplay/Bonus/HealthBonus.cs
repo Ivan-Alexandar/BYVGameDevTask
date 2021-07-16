@@ -13,7 +13,7 @@ public class HealthBonus : MonoBehaviour
     void Start()
     {
         timer = gameObject.AddComponent<Timer>();
-        timer.Duration = 20;
+        timer.Duration = 6.75f;
         timer.Run();
     }
 
@@ -28,7 +28,7 @@ public class HealthBonus : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "bullet")
+        if (collision.collider.tag == "bullet" || collision.collider.tag =="bulletM")
         {
             bar.transform.localScale = new Vector3(bar.transform.localScale.x -0.1f, 1,1);
             if (bar.transform.localScale.x <= 0)

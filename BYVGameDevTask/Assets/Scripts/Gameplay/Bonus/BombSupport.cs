@@ -19,7 +19,7 @@ public class BombSupport : MonoBehaviour
     {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         timer = gameObject.AddComponent<Timer>();
-        timer.Duration = 6;
+        timer.Duration = 6.75f;
         timer.Run();
         PlayerFunctionality = GameObject.FindWithTag("PlayerFunc");
         playerController = PlayerFunctionality.GetComponent<PlayerController>();
@@ -41,7 +41,7 @@ public class BombSupport : MonoBehaviour
         //playerController = collision.collider.GetComponentInParent<PlayerController>();
         if (collision.collider.tag != "ground")
         {
-            if (collision.collider.tag != "bullet")
+            if (collision.collider.tag != "bullet" && collision.collider.tag != "bulletM")
             {
 
 

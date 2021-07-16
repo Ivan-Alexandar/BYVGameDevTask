@@ -243,6 +243,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fullHPBars: 0
   emptyHPBars: 0
+  shield: {fileID: 6571329813764980414, guid: c79405852e5798d46bad476a910cde45, type: 3}
+  body: {fileID: 0}
   BulletFF: {fileID: 2712520272071145695, guid: 18838c4f67d81254898c8aca77d074e7,
     type: 3}
   BBCol: {fileID: 5093379955753817505, guid: 1b8a699d7b3c3314097b6177c676d132, type: 3}

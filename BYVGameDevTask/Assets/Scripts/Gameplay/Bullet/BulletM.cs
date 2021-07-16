@@ -12,6 +12,12 @@ public class BulletM : MonoBehaviour
     public static int headShotCounter = 0;
     public static int collisionOverload = 0;
     public static int negativeCollison = 0;
+    public GameObject shield;
+    public GameObject body;
+    
+
+    static GameObject shield2;
+
     HealthBonus healthBonus;
 
     public GameObject BulletFFM;
@@ -133,7 +139,7 @@ public class BulletM : MonoBehaviour
         else if (collision.gameObject.tag == "HealthBonus")
         {
             healthBonus = collision.collider.GetComponent<HealthBonus>();
-            Instantiate(BBCol, collision.transform.position, Quaternion.identity);
+            //Instantiate(BBCol, collision.transform.position, Quaternion.identity);
             Instantiate(BulletFFM, gameObject.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
             Destroy(gameObject);
 
@@ -164,6 +170,23 @@ public class BulletM : MonoBehaviour
                 headShotCounter = 0;
             }
 
+        }
+        if (collision.collider.tag == "ShieldBonus")
+        {
+
+            Instantiate(BulletFFM, gameObject.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            Destroy(gameObject);
+             body = GameObject.FindGameObjectWithTag("body2");
+            //shield2 = Instantiate(shield, body.GetComponent<Rigidbody2D>().transform.position, Quaternion.identity);
+            shield2 = Instantiate(shield, body.transform.position, Quaternion.identity);
+            shield2.transform.parent = GameObject.FindGameObjectWithTag("player2").transform;
+        }
+        if (collision.collider.tag == "shield")
+        {
+            SoundManager.PlaySound("BulletRicochet");
+            Instantiate(BBCol, gameObject.transform.position, Quaternion.identity);
+            Instantiate(BulletFFM, gameObject.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            Destroy(gameObject);
         }
         Destroy(gameObject);
     }

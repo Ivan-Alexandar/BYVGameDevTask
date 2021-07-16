@@ -6,7 +6,7 @@ public enum BonusEnum
 {
     Bomb,
     FirstAidKit,
-    Bazooka,
-    Shield
+    Shield,
+    Bazooka
 
 }

@@ -17,6 +17,11 @@ TagManager:
   - Wall
   - PlayerFunc
   - HealthBonus
+  - ShieldBonus
+  - shield
+  - player1
+  - player2
+  - bulletM
   layers:
   - Default
   - TransparentFX
@@ -27,7 +32,7 @@ TagManager:
   - 
   - 
   - bullet
-  - shootButtons
+  - bulletM
   - body1
   - body2
   - Gun
@@ -37,9 +42,9 @@ TagManager:
   - ground
   - wall
   - particles
+  - shield
   - 
-  - 
-  - 
+  - shootButtons
   - 
   - 
   - 
