@@ -24,7 +24,7 @@ public class BulletM : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        playerController = collision.gameObject.GetComponentInParent<PlayerController>();
+        playerController = GameObject.FindGameObjectWithTag("PlayerFunc").GetComponent<PlayerController>();
         if (collision.gameObject.tag == "body1")
         {
             SoundManager.PlaySound("GettingHit");
@@ -32,7 +32,7 @@ public class BulletM : MonoBehaviour
             Destroy(gameObject);
             if (collisionCount < 5)
             {
-                Destroy(playerController.hp1[collisionCount]);
+                playerController.hp1[collisionCount].GetComponent<SpriteRenderer>().enabled = false;
                 collisionCount++;
             }
             else
@@ -50,7 +50,7 @@ public class BulletM : MonoBehaviour
             Destroy(gameObject);
             if (collisionCount < 5)
             {
-                Destroy(playerController.hp2[collisionCount]);
+                playerController.hp2[collisionCount].GetComponent<SpriteRenderer>().enabled = false;
                 collisionCount++;
             }
             else
@@ -72,7 +72,7 @@ public class BulletM : MonoBehaviour
                     if (collisionCount<5)
                     {
 
-                        Destroy(playerController.hp1[collisionCount]);
+                        playerController.hp1[collisionCount].GetComponent<SpriteRenderer>().enabled = false;
                         collisionCount++;
                     }
                     
@@ -92,7 +92,7 @@ public class BulletM : MonoBehaviour
             Destroy(gameObject);
             if (collisionCount < 5)
             {
-                Destroy(playerController.hp1[collisionCount]);
+                playerController.hp1[collisionCount].GetComponent<SpriteRenderer>().enabled = false;
                 collisionCount++;
 
             }
@@ -114,6 +114,12 @@ public class BulletM : MonoBehaviour
             Instantiate(BulletFFM, gameObject.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
             Destroy(gameObject);
  
+        }
+        else if (collision.gameObject.tag == "HealthBonus")
+        {
+            Instantiate(BBCol, collision.transform.position, Quaternion.identity);
+            Instantiate(BulletFFM, gameObject.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            Destroy(gameObject);
         }
     }
 }

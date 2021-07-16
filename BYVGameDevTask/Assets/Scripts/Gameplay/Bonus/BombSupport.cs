@@ -53,7 +53,7 @@ public class BombSupport : MonoBehaviour
                     {
                         if (collisionCounter < 5)
                         {
-                            Destroy(playerController.hp1[collisionCounter]);
+                            playerController.hp1[collisionCounter].GetComponent<SpriteRenderer>().enabled = false;
                             collisionCounter++;
 
                         }
@@ -70,7 +70,7 @@ public class BombSupport : MonoBehaviour
                     {
                         if (collisionCounter < 5)
                         {
-                            Destroy(playerController.hp2[collisionCounter]);
+                            playerController.hp2[collisionCounter].GetComponent<SpriteRenderer>().enabled = false;
                             collisionCounter++;
 
                         }

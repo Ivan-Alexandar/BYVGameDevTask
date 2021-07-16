@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour
 {
     PlayerController playerController;
     public static int collisionCount = 0;
+    public static int fullHPBars = 0;
+    public static int emptyHPBars = 0;
 
     public GameObject BulletFF;
     public GameObject BBCol;
@@ -23,7 +25,7 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        playerController = collision.gameObject.GetComponentInParent<PlayerController>();
+        playerController = GameObject.FindGameObjectWithTag("PlayerFunc").GetComponent<PlayerController>();
         if (collision.gameObject.tag == "body1")
         {
             SoundManager.PlaySound("GettingHit");
@@ -31,7 +33,7 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
             if (collisionCount < 5)
             {
-                Destroy(playerController.hp1[collisionCount]);
+                playerController.hp1[collisionCount].GetComponent<SpriteRenderer>().enabled = false;
                 collisionCount++;
             }
             else
@@ -48,7 +50,7 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
             if (collisionCount < 5)
             {
-                Destroy(playerController.hp2[collisionCount]);
+                playerController.hp2[collisionCount].GetComponent<SpriteRenderer>().enabled = false;
                 collisionCount++;
             }
             else
@@ -69,7 +71,7 @@ public class Bullet : MonoBehaviour
                 {
                     if (collisionCount < 5)
                     {
-                        Destroy(playerController.hp1[collisionCount]);
+                        playerController.hp2[collisionCount].GetComponent<SpriteRenderer>().enabled = false;
                         collisionCount++;
                     }
                     else
@@ -91,10 +93,10 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
             if (collisionCount < 5)
             {
-                
-                Destroy(playerController.hp1[collisionCount]);
+
+                playerController.hp2[collisionCount].GetComponent<SpriteRenderer>().enabled = false;
                 collisionCount++;
-                
+
 
             }
             else
@@ -116,6 +118,40 @@ public class Bullet : MonoBehaviour
             SoundManager.PlaySound("BulletRicochet");
             Instantiate(BBCol, collision.transform.position, Quaternion.identity);
             Instantiate(BulletFF, gameObject.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            Destroy(gameObject);
+        }
+        else if (collision.gameObject.tag == "HealthBonus")
+        {
+            HealthBonus healthBonus = collision.collider.GetComponent<HealthBonus>();
+            Instantiate(BBCol, collision.transform.position, Quaternion.identity);
+            Instantiate(BulletFF, gameObject.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            for (emptyHPBars = 0; emptyHPBars < 3; emptyHPBars += 0)
+            {
+                if (healthBonus.bar.transform.localScale.x <= 0.1)
+                {
+                    if (fullHPBars < 5)
+                    {
+                        if (playerController.hp1[fullHPBars].GetComponent<SpriteRenderer>().enabled == false)
+                        {
+
+                            playerController.hp1[fullHPBars].GetComponent<SpriteRenderer>().enabled = true;
+                            emptyHPBars++;
+                            print(emptyHPBars);
+
+                        }
+                        else
+                        {
+                            fullHPBars++;
+                            print(fullHPBars);
+
+                        }
+
+
+                    }
+                }
+
+
+            }
             Destroy(gameObject);
         }
     }
