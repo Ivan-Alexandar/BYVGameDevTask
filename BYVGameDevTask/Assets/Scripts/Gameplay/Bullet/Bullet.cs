@@ -6,8 +6,12 @@ public class Bullet : MonoBehaviour
 {
     PlayerController playerController;
     public static int collisionCount = 0;
-    public static int fullHPBars = 0;
-    public static int emptyHPBars = 0;
+    public static int headShotCounter = 0;
+    public static int collisionOverload = 0;
+    public static int negativeCollison = 0;
+    public int fullHPBars = 0;
+    public int emptyHPBars = 0;
+    HealthBonus healthBonus;
 
     public GameObject BulletFF;
     public GameObject BBCol;
@@ -25,6 +29,17 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
+        if (collisionCount >= 5)
+        {
+            collisionOverload = collisionCount;
+            collisionCount = collisionOverload - collisionCount;
+        }
+        if (collisionCount < 0)
+        {
+            negativeCollison = collisionCount;
+            collisionCount = -negativeCollison;
+        }
         playerController = GameObject.FindGameObjectWithTag("PlayerFunc").GetComponent<PlayerController>();
         if (collision.gameObject.tag == "body1")
         {
@@ -36,11 +51,6 @@ public class Bullet : MonoBehaviour
                 playerController.hp1[collisionCount].GetComponent<SpriteRenderer>().enabled = false;
                 collisionCount++;
             }
-            else
-            {
-
-            }
-
 
         }
         else if (collision.gameObject.tag == "body2")
@@ -48,42 +58,38 @@ public class Bullet : MonoBehaviour
             SoundManager.PlaySound("GettingHit");
             Instantiate(blood, collision.transform.position, Quaternion.identity);
             Destroy(gameObject);
-            if (collisionCount < 5)
+            if (collisionCount < 5 && headShotCounter < 3)
             {
                 playerController.hp2[collisionCount].GetComponent<SpriteRenderer>().enabled = false;
                 collisionCount++;
             }
-            else
-            {
-
-            }
         }
         else if (collision.gameObject.tag == "Head")
         {
+            headShotCounter = 0;
             SoundManager.PlaySound("GettingHit");
             Instantiate(blood, collision.transform.position, Quaternion.identity);
             Destroy(gameObject);
-            Destroy(gameObject);
             if (collisionCount < 5)
             {
-
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 5; i++)
                 {
-                    if (collisionCount < 5)
-                    {
-                        playerController.hp2[collisionCount].GetComponent<SpriteRenderer>().enabled = false;
-                        collisionCount++;
-                    }
-                    else
+
+                    if (collisionCount < 5 && headShotCounter < 3)
                     {
 
+                        if (playerController.hp2[i].GetComponent<SpriteRenderer>().enabled == true)
+                        {
+
+                            playerController.hp2[i].GetComponent<SpriteRenderer>().enabled = false;
+                            headShotCounter++;
+                            collisionCount++;
+
+                        }
+
                     }
+                    
                 }
-
-            }
-            else
-            {
-
             }
         }
         else if (collision.gameObject.tag == "Leg")
@@ -99,10 +105,7 @@ public class Bullet : MonoBehaviour
 
 
             }
-            else
-            {
 
-            }
         }
         else if (collision.gameObject.tag == "bullet")
         {
@@ -122,37 +125,38 @@ public class Bullet : MonoBehaviour
         }
         else if (collision.gameObject.tag == "HealthBonus")
         {
-            HealthBonus healthBonus = collision.collider.GetComponent<HealthBonus>();
+            healthBonus = collision.collider.GetComponent<HealthBonus>();
             Instantiate(BBCol, collision.transform.position, Quaternion.identity);
             Instantiate(BulletFF, gameObject.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
-            for (emptyHPBars = 0; emptyHPBars < 3; emptyHPBars += 0)
+            Destroy(gameObject);
+
+            if (healthBonus.bar.transform.localScale.x <= 0.1)
             {
-                if (healthBonus.bar.transform.localScale.x <= 0.1)
+
+                for (int i = 0; i < 5; i++)
                 {
-                    if (fullHPBars < 5)
+                    if (fullHPBars < 5 && emptyHPBars < 3)
                     {
-                        if (playerController.hp1[fullHPBars].GetComponent<SpriteRenderer>().enabled == false)
+                        if (playerController.hp1[i].GetComponent<SpriteRenderer>().enabled == false)
                         {
 
-                            playerController.hp1[fullHPBars].GetComponent<SpriteRenderer>().enabled = true;
+                            playerController.hp1[i].GetComponent<SpriteRenderer>().enabled = true;
                             emptyHPBars++;
-                            print(emptyHPBars);
+                            //print(emptyHPBars);
 
                         }
-                        else
+                        else if (playerController.hp1[i].GetComponent<SpriteRenderer>().enabled == true)
                         {
                             fullHPBars++;
-                            print(fullHPBars);
+                            //print(fullHPBars);
 
                         }
-
-
                     }
                 }
-
-
+                collisionCount -= 3;
+                headShotCounter = 0;
             }
-            Destroy(gameObject);
         }
+        Destroy(gameObject);
     }
 }

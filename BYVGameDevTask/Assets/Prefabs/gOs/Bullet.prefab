@@ -241,6 +241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b32061f1f39b44a878a6cf3280b4ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fullHPBars: 0
+  emptyHPBars: 0
   BulletFF: {fileID: 2712520272071145695, guid: 18838c4f67d81254898c8aca77d074e7,
     type: 3}
   BBCol: {fileID: 5093379955753817505, guid: 1b8a699d7b3c3314097b6177c676d132, type: 3}

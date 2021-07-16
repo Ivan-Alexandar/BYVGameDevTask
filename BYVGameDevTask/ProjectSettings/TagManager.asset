@@ -16,6 +16,7 @@ TagManager:
   - Gun2
   - Wall
   - PlayerFunc
+  - HealthBonus
   layers:
   - Default
   - TransparentFX
