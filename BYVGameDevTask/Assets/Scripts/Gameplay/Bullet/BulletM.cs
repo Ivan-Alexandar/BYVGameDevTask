@@ -68,15 +68,15 @@ public class BulletM : MonoBehaviour
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    if (collisionCount < 5)
+
+                    if (collisionCount<5)
                     {
+
                         Destroy(playerController.hp1[collisionCount]);
                         collisionCount++;
                     }
-                    else
-                    {
-
-                    }
+                    
+                  
                 }
 
             }
@@ -96,10 +96,7 @@ public class BulletM : MonoBehaviour
                 collisionCount++;
 
             }
-            else
-            {
-                
-            }
+
         }
         else if (collision.gameObject.tag =="bullet")
         {
@@ -109,6 +106,14 @@ public class BulletM : MonoBehaviour
             
             Destroy(gameObject);
             Destroy(collision.collider);
+        }
+        else if (collision.gameObject.tag == "Bomb" )
+        {
+            SoundManager.PlaySound("BulletRicochet");
+            Instantiate(BBCol, collision.transform.position, Quaternion.identity);
+            Instantiate(BulletFFM, gameObject.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            Destroy(gameObject);
+ 
         }
     }
 }

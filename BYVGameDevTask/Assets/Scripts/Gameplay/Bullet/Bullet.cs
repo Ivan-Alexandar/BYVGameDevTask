@@ -111,5 +111,12 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
             Destroy(collision.collider);
         }
+        else if (collision.gameObject.tag == "Bomb")
+        {
+            SoundManager.PlaySound("BulletRicochet");
+            Instantiate(BBCol, collision.transform.position, Quaternion.identity);
+            Instantiate(BulletFF, gameObject.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            Destroy(gameObject);
+        }
     }
 }

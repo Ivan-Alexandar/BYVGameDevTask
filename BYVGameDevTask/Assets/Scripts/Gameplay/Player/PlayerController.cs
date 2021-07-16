@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public GameObject player1;
     public GameObject player2;
 
+    public GameObject[] bodyPart;
+    public GameObject[] bodyPart2;
 
     public GameObject GunFire;
     public GameObject GunFireM;
@@ -140,6 +142,8 @@ public class PlayerController : MonoBehaviour
         Instantiate(GunFireM, gunR.position, Quaternion.identity);
         Instantiate(bulletM, gunR.position, Quaternion.identity);
     }
+
+
 
 
 

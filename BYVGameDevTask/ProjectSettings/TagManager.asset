@@ -13,6 +13,9 @@ TagManager:
   - Leg
   - bullet
   - Bomb
+  - Gun2
+  - Wall
+  - PlayerFunc
   layers:
   - Default
   - TransparentFX
@@ -31,8 +34,8 @@ TagManager:
   - hands
   - Bonuses
   - ground
-  - 
-  - 
+  - wall
+  - particles
   - 
   - 
   - 
